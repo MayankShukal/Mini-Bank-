@@ -1,0 +1,3 @@
+package edu.minibank.service;
+import edu.minibank.model.Transaction; import java.io.IOException; import java.nio.file.*; import java.time.Instant;
+public final class TransactionLog {private TransactionLog(){} public static synchronized void append(Path file,Transaction t)throws IOException{append(file,Instant.now()+","+t.type()+","+t.accountNumber()+","+(t.targetAccountNumber()==null?"":t.targetAccountNumber())+","+t.amount());} public static synchronized void append(Path file,String line)throws IOException{Path p=file.toAbsolutePath();Files.createDirectories(p.getParent());Files.writeString(p,line+System.lineSeparator(),StandardOpenOption.CREATE,StandardOpenOption.APPEND);}}

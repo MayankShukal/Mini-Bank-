@@ -1,0 +1,3 @@
+package edu.minibank.util;
+import edu.minibank.model.*;
+public final class CommandParser { private CommandParser(){} public static Command parse(String line){String[] p=line==null?new String[0]:line.trim().split("\\s+");if(p.length!=3)throw new IllegalArgumentException("Use: TYPE ACCOUNT_NUMBER AMOUNT");try{TransactionType t=TransactionType.valueOf(p[0].toUpperCase());long n=Long.parseLong(p[2]);if(n<=0)throw new IllegalArgumentException("Amount must be positive");return new Command(t,p[1],n);}catch(IllegalArgumentException e){throw new IllegalArgumentException("Invalid command: "+e.getMessage(),e);}} }
